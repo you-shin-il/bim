@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <th:block th:replace="layout/fragments/commonHead"></th:block>
+        <title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE"></title>
+    </head>
+    <body>
+        <div id="wrap" class="main">
+            <th:block th:replace="layout/fragments/commonHeader"></th:block>
+        </div>
+    <!-- page content body 구성 -->
+        <th:block layout:fragment="content"></th:block>
+    <!-- 공통 footer -->
+        <footer th:replace="layout/fragments/commonFooter :: commonFooter"></footer>
+    </body>
+</html>

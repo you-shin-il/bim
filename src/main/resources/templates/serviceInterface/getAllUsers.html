@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/defaultLayout">
+<head>
+    <title>사용자 목록 조회</title>
+</head>
+<body>
+    <div id="wrap" class="main">
+        <th:block th:replace="layout/fragments/commonHeader"></th:block>
+    </div>
+    <th:block layout:fragment="content">
+        <div style="width:1350px;margin:0 auto;text-align:center;padding:30px;font-size:20px;">
+            <form name="searchSUser" action="/serviceInterface/getAllUsers.do" method="GET">
+                <label for="name">name</label>          <input id="name"        type="text" name="name"     th:value="${searchSUser.name}" />
+                <label for="username">username</label>  <input id="username"    type="text" name="username" th:value="${searchSUser.username}" />
+                <label for="userType">type</label>
+                <select id="userType" name="userType">
+                    <option value="-1" th:selected="${searchSUser.userType == -1}">전체</option>
+                    <option value="0"  th:selected="${searchSUser.userType ==  0}">SYSTEM</option>
+                    <option value="1"  th:selected="${searchSUser.userType ==  1}">ADMIN</option>
+                    <option value="2"  th:selected="${searchSUser.userType ==  2}">USER</option>
+                    <option value="3"  th:selected="${searchSUser.userType ==  3}">READ_ONLY</option>
+                </select>
+                <label for="state">state</label>
+                <select id="state" name="state">
+                    <option value="-1" th:selected="${searchSUser.state  == -1}">전체</option>
+                    <option value="0"  th:selected="${searchSUser.state  ==  0}">active</option>
+                    <option value="1"  th:selected="${searchSUser.state  ==  1}">deleted</option>
+                </select>
+                <button class="btn btn-secondary" type="submit">검색</button>
+                <sec:csrfInput />
+            </form>
+        </span>
+            <br/><br/>
+            <div style="float:left;">
+                <!--<p>총 건</p>-->
+                <p th:text="'총 ' + ${#lists.size(result)} + ' 건'"/>
+            </div>
+        </div>
+
+        <!-- container -->
+        <div id="container" style="width:1380px;margin:0 auto;">
+            <div>
+                <table>
+                    <colgroup>
+                        <col width="172px" />
+                        <col width="172px" />
+                        <col width="172px" />
+                        <col width="172px" />
+                        <col width="172px" />
+                        <col width="172px" />
+                        <col width="172px" />
+                        <col width="172px" />
+                    </colgroup>
+                    <tbody>
+                        <tr style="background-color:rgba(28, 148, 196, 1);border-top:1px solid #dedede;font-size:18px;">
+                            <th style="text-align:center;border-left:1px solid #dedede;">name</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">username</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">create at</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">type</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">projects</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">states</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">last login</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">버튼</th>
+                        </tr>
+                        <tr th:each="suser : ${result}">
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;" th:text="${suser.name}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;" th:text="${suser.username}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;" th:text="${suser.createdOn}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${suser.userType}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${#lists.size(suser.hasRightsOn)}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${suser.state}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${suser.lastSeen}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;border-right:1px solid #dedede;text-align:center;" th:text="버튼"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--<%@ include file="/WEB-INF/jsp/web/cmm/paging.jsp"%>-->
+        </div>
+    </th:block>
+
+    <th:block layout:fragment="pageCustomScript">
+        <script th:src="@{/assets/vendor/jquery/jquery.js}"></script>
+    </th:block>
+    <th:block layout:fragment="pageCustomCss">
+        <script th:src="@{/assets/vendor/jquery/jquery.css}"></script>
+    </th:block>
+</body>
+</html>

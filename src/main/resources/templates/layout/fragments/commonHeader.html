@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <div id="header">
+        <h1><a href="/openApi/selectOpenApiList.do"><img src="/iMonitor/images/logo.png" alt="i-Monitor"></a></h1>
+        <a href="#" id="btnHeaderMenu" class="btnHeaderMenu">좌측메뉴 열기</a>
+        <div id="headerMenu">
+            <div class="menu_home"><a href="/openApi/selectOpenApiList.do"><img src="/iMonitor/images/logo.png" alt="i-Monitor"></a></div>
+            <ul>
+                <li class="menu_site"><a href="/openApi/selectBidPblancListInfoList.do">입찰정보-용역</a></li>
+                <li class="menu_server"><a href="/keyword/keywordModify.do">검색 키워드</a></li>
+                <li class="menu_user"><a href="/member/selectMemberList.do">회원관리</a></li>
+            </ul>
+            <a href="#" id="btnHeaderMenuClose" class="btnHeaderMenuClose">좌측메뉴 닫기</a>
+        </div>
+        <form name="logout" action="${logoutUrl}" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="submit" class="btnLogout" value="로그아웃" />
+        </form>
+    </div>
+</html>
