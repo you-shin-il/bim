@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <th:block th:replace="layout/fragments/commonHead"></th:block>
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="container" class="login">
+                <div id="loginForm">
+                    <h2><a href="index.html"><img src="/images/logo.png" alt="bim"></a></h2>
+                    <form id="flogin" method="POST" th:action="@{/authenticate}">
+                        <fieldset>
+                            <div id="loginFormBox">
+                                <input type="text" 		name="username" placeholder="아이디(이메일주소)">
+                                <input type="password" 	name="password" placeholder="비밀번호" onkeypress="if(event.keyCode==13)document.getElementById('flogin').submit();">
+                                <input type="submit" value="로그인">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

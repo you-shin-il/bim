@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 	@RequestMapping("index.do")
 	public String main() {
-		return "login/login";
+		return "loginForm";
 	}
 }
