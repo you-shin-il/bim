@@ -1,13 +1,7 @@
 package inje.security;
 
-import inje.security.handler.AuthenticationFailureHandlerImpl;
-import inje.security.handler.CustomLoginSuccessHandler;
-import inje.security.handler.LogoutSuccessHandlerImpl;
-import inje.security.provider.CustomAuthenticationProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,22 +12,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private CustomAuthenticationProvider customAuthenticationProvider;
+	/*@Autowired
+	private CustomAuthenticationProvider customAuthenticationProvider;*/
 
 /*	@Autowired
 	private CustomLoginSuccessHandler customLoginSuccessHandler;*/
 
-	@Autowired
-	private AuthenticationFailureHandlerImpl authenticationFailureHandlerImpl;
-
-	@Autowired
-	private LogoutSuccessHandlerImpl logoutSuccessHandlerImpl;
-
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(customAuthenticationProvider);
-	}
+/*	@Autowired
+	private AuthenticationFailureHandlerImpl authenticationFailureHandlerImpl;*/
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -58,8 +44,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		    USER(2),
 		    READ_ONLY(3);
 		* */
-		http.authorizeRequests().antMatchers("/login/**", "/css/**", "/js/**", "/img/**").permitAll()
-								.antMatchers("/serviceInterface/**").hasRole("ADMIN")
+		http.csrf().disable().authorizeRequests()
+								.mvcMatchers("/login/**", "/css/**", "/js/**", "/img/**").permitAll()
+								.mvcMatchers("/serviceInterface/**").hasAnyRole("ROLE_ADMIN") //내부적으로 접두어 "ROLE_"가 붙는다.
 								.anyRequest()
 								.authenticated();
 //								.antMatchers("/**/**").hasRole("SYSTEM")
@@ -69,14 +56,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		http.formLogin().loginPage("/login/loginForm.do")
 						.loginProcessingUrl("/authenticate")
-						.defaultSuccessUrl("/serviceInterface/getAllUsers.do")
 						.usernameParameter("username")
-						.passwordParameter("password")
+						.passwordParameter("password");
 						/*.successHandler(customLoginSuccessHandler)*/
-						.failureHandler(authenticationFailureHandlerImpl);
+						/*.failureHandler(authenticationFailureHandlerImpl);*/
 
-		http.logout().logoutSuccessHandler(logoutSuccessHandlerImpl)
-					 .invalidateHttpSession(true);//세션 삭제 여부
+		/*http.logout().logoutSuccessHandler(logoutSuccessHandlerImpl)
+					 .invalidateHttpSession(true);//세션 삭제 여부*/
 
 		//http.sessionManagement().maximumSessions(1).expiredUrl("/login/loginForm.do?userOver=true");//다중접속 가능한 수 및 다중 접속 시 먼저 접속된 사용자 url
 		//http.exceptionHandling().accessDeniedHandler(accessDeniedHandlerImpl);//권한이 없을경우 handler

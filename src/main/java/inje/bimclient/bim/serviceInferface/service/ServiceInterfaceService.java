@@ -1,7 +1,7 @@
-package inje.bim.serviceInferface.service;
+package inje.bimclient.bim.serviceInferface.service;
 
-import inje.bim.serviceInferface.dao.ServiceInterfaceDao;
-import inje.bim.serviceInferface.model.SUserSearch;
+import inje.bimclient.bim.serviceInferface.dao.ServiceInterfaceDao;
+import inje.bimclient.bim.serviceInferface.model.SUserSearch;
 import org.bimserver.interfaces.objects.SUser;
 import org.bimserver.shared.exceptions.PublicInterfaceNotFoundException;
 import org.bimserver.shared.exceptions.ServiceException;

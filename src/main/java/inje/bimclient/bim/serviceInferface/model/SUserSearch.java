@@ -1,4 +1,4 @@
-package inje.bim.serviceInferface.model;
+package inje.bimclient.bim.serviceInferface.model;
 
 import org.bimserver.interfaces.objects.SUser;
 

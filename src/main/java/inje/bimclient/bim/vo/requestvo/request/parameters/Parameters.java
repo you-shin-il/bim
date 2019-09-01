@@ -1,4 +1,4 @@
-package inje.bim.vo.requestvo.request.parameters;
+package inje.bimclient.bim.vo.requestvo.request.parameters;
 
 public class Parameters {
     private String _projectName;

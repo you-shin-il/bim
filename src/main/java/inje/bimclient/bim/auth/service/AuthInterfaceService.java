@@ -1,10 +1,9 @@
-package inje.bim.auth.service;
+package inje.bimclient.bim.auth.service;
 
-import inje.bim.auth.dao.AuthInterfaceDao;
+import inje.bimclient.bim.auth.dao.AuthInterfaceDao;
 import org.bimserver.interfaces.objects.SUser;
 import org.bimserver.shared.exceptions.PublicInterfaceNotFoundException;
 import org.bimserver.shared.exceptions.ServerException;
-import org.bimserver.shared.exceptions.ServiceException;
 import org.bimserver.shared.exceptions.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

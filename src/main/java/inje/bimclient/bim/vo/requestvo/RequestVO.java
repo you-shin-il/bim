@@ -1,6 +1,6 @@
-package inje.bim.vo.requestvo;
+package inje.bimclient.bim.vo.requestvo;
 
-import inje.bim.vo.requestvo.request.Request;
+import inje.bimclient.bim.vo.requestvo.request.Request;
 
 public class RequestVO {
     private String token;

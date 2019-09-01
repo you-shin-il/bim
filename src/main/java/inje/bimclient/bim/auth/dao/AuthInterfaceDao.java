@@ -1,4 +1,4 @@
-package inje.bim.auth.dao;
+package inje.bimclient.bim.auth.dao;
 
 import org.bimserver.client.BimServerClient;
 import org.bimserver.interfaces.objects.SUser;

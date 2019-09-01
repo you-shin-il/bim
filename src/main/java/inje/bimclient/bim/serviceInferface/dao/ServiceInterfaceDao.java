@@ -1,4 +1,4 @@
-package inje.bim.serviceInferface.dao;
+package inje.bimclient.bim.serviceInferface.dao;
 
 import org.bimserver.client.BimServerClient;
 import org.bimserver.interfaces.objects.SUser;

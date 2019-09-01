@@ -1,7 +1,7 @@
-package inje.bim.serviceInferface.web;
+package inje.bimclient.bim.serviceInferface.web;
 
-import inje.bim.serviceInferface.model.SUserSearch;
-import inje.bim.serviceInferface.service.ServiceInterfaceService;
+import inje.bimclient.bim.serviceInferface.model.SUserSearch;
+import inje.bimclient.bim.serviceInferface.service.ServiceInterfaceService;
 import org.bimserver.interfaces.objects.SUser;
 import org.bimserver.shared.ChannelConnectionException;
 import org.bimserver.shared.exceptions.PublicInterfaceNotFoundException;

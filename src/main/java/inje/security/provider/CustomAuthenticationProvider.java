@@ -1,6 +1,6 @@
 package inje.security.provider;
 
-import inje.bim.auth.service.AuthInterfaceService;
+import inje.bimclient.bim.auth.service.AuthInterfaceService;
 import org.bimserver.interfaces.objects.SUser;
 import org.bimserver.shared.exceptions.PublicInterfaceNotFoundException;
 import org.bimserver.shared.exceptions.ServerException;
@@ -51,7 +51,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		}
 
 		ArrayList<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority("ADMIN"));
+		authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		log.debug("userType : " + suser.getUserType().name());
 		System.out.println("userType : " + suser.getUserType().name());
 		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(suser, password, authorities);

@@ -1,7 +1,7 @@
-package inje.bim.vo.requestvo.request;
+package inje.bimclient.bim.vo.requestvo.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import inje.bim.vo.requestvo.request.parameters.Parameters;
+import inje.bimclient.bim.vo.requestvo.request.parameters.Parameters;
 
 public class Request {
     @JsonProperty("interface")
