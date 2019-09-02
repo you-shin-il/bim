@@ -51,7 +51,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		}
 
 		ArrayList<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		authorities.add(new SimpleGrantedAuthority("ROLE_" + suser.getUserType().name()));
 		log.debug("userType : " + suser.getUserType().name());
 		System.out.println("userType : " + suser.getUserType().name());
 		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(suser, password, authorities);

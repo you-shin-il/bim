@@ -35,7 +35,15 @@ public class BimApplication extends SpringBootServletInitializer {
     @Bean
     public BimServerClient getJsonBimServerClientFactory() throws BimServerClientException, ServiceException, ChannelConnectionException {
         JsonBimServerClientFactory factory = new JsonBimServerClientFactory(bimserverAddress);
-        return factory.create(new UsernamePasswordAuthenticationInfo(bimserverUsername, bimserverPassword));
+        BimServerClient bimServerClient = factory.create(new UsernamePasswordAuthenticationInfo(bimserverUsername, bimserverPassword));
+/*        bimServerClient.setToken("BD69DC7EA906AC49E9CE31D087236714");//kyoyaiida@injeinc.co.kr
+        bimServerClient.setToken("FDD4E7595F15F808B25B8CC985BDF85E");//iwonsiks@hotmail.com
+        bimServerClient.setToken("B1C1482AA4FEF6DD59A9E70F8DC2B6CA");//wskim@injeinc.co.kr
+        bimServerClient.setToken("7D83B8901BFACEA4D9B44E4F425B755A");//kyoyaiida83@gmail.com
+        bimServerClient.setToken("A878BCC616880D1CA227394E74BBF075");//kyoyaiida@naver.com
+        bimServerClient.setToken("475CB9519065AC85C27570B4C43D00A1");//jjy_5212@injeinc.co.kr*/
+
+        return bimServerClient;
     }
 
 }
