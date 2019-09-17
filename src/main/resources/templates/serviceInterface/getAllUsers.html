@@ -6,13 +6,21 @@
 <head>
     <title>사용자 목록 조회</title>
 </head>
+<div id="wrap" class="main">
+    <th:block th:replace="layout/fragments/commonHeader"></th:block>
+</div>
 <body>
-    <div id="wrap" class="main">
-        <th:block th:replace="layout/fragments/commonHeader"></th:block>
-    </div>
     <th:block layout:fragment="content">
+        <script>
+            function fn_formAction(action, oid) {
+                $("#oid").val(oid);
+                $("#searchSUser").attr("action", "/serviceInterface/" + action + ".do");
+                $("#searchSUser").submit();
+            }
+        </script>
         <div style="width:1350px;margin:0 auto;text-align:center;padding:30px;font-size:20px;">
-            <form name="searchSUser" action="/serviceInterface/getAllUsers.do" method="GET">
+            <form id="searchSUser" name="searchSUser" method="POST">
+                <input type="hidden" id="oid" name="oid" th:value="${searchSUser.oid}"/>
                 <label for="name">name</label>          <input id="name"        type="text" name="name"     th:value="${searchSUser.name}" />
                 <label for="username">username</label>  <input id="username"    type="text" name="username" th:value="${searchSUser.username}" />
                 <label for="userType">type</label>
@@ -42,8 +50,9 @@
 
         <!-- container -->
         <div id="container" style="width:1380px;margin:0 auto;">
+            <button type="button" onclick="fn_registMember();" style="font-size:25px;background-color:darkgray;margin-bottom:10px;padding:0 5px;" th:text="${'사용자 등록'}"></button>
             <div>
-                <table>
+                <table style="border-top:1px solid #dedede">
                     <colgroup>
                         <col width="172px" />
                         <col width="172px" />
@@ -63,11 +72,14 @@
                             <th style="text-align:center;border-left:1px solid #dedede;">projects</th>
                             <th style="text-align:center;border-left:1px solid #dedede;">states</th>
                             <th style="text-align:center;border-left:1px solid #dedede;">last login</th>
-                            <th style="text-align:center;border-left:1px solid #dedede;">버튼</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;border-right:1px solid #dedede;">버튼</th>
                         </tr>
                         <tr th:each="suser : ${result}">
-                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;" th:text="${suser.name}"/>
-                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;" th:text="${suser.username}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;" th:text="${suser.name}" th:href="#{/serviceInterface/userDetail.do}" />
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;">
+                                <a th:href="|javascript:fn_formAction('userDetailView','${suser.oid}')|" th:text="${suser.username}"/>
+                                <!--<a th:href="@{/serviceInterface/userDetail.do(oid=${suser.oid})}" th:text="${suser.username}"></a>-->
+                            </td>
                             <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;" th:text="${suser.createdOn}"/>
                             <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${suser.userType}"/>
                             <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${#lists.size(suser.hasRightsOn)}"/>

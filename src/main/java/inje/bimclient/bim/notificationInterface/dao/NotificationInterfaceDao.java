@@ -1,4 +1,4 @@
-package inje.bimclient.bim.serviceInferface.dao;
+package inje.bimclient.bim.notificationInterface.dao;
 
 import org.bimserver.client.BimServerClient;
 import org.bimserver.interfaces.objects.SUser;
@@ -10,12 +10,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ServiceInterfaceDao {
-	@Autowired
-	BimServerClient bimServerClient;
+public class NotificationInterfaceDao {
+    @Autowired
+    BimServerClient bimServerClient;
 
-	public List<SUser> getAllusers() throws ServiceException, PublicInterfaceNotFoundException {
-		return bimServerClient.getServiceInterface().getAllUsers();
-	}
-
+    public List<SUser> getAllusers() throws ServiceException, PublicInterfaceNotFoundException {
+        return bimServerClient.getServiceInterface().getAllUsers();
+    }
 }

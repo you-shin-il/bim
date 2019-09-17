@@ -13,42 +13,42 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
 public class ThymeleafConfiguration {
-	@Value("${spring.thymeleaf.cache}")
-	private boolean isCache;
+    @Value("${spring.thymeleaf.cache}")
+    private boolean isCache;
 
-	@Bean
-	public SpringResourceTemplateResolver templateResolver() {
-		SpringResourceTemplateResolver  templateResolver = new SpringResourceTemplateResolver ();
-		templateResolver.setPrefix("classpath:templates/");
-		templateResolver.setCharacterEncoding("UTF-8");
-		templateResolver.setSuffix(".html");
-		templateResolver.setTemplateMode("LEGACYHTML5");
-		templateResolver.setCacheable(isCache);
-		return templateResolver;
-	}
+    @Bean
+    public SpringResourceTemplateResolver templateResolver() {
+        SpringResourceTemplateResolver  templateResolver = new SpringResourceTemplateResolver ();
+        templateResolver.setPrefix("classpath:templates/");
+        templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("LEGACYHTML5");
+        templateResolver.setCacheable(isCache);
+        return templateResolver;
+    }
 
-	@Bean
-	public SpringTemplateEngine templateEngine(MessageSource messageSource) {
-		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-		templateEngine.setTemplateResolver(templateResolver());
-		templateEngine.setTemplateEngineMessageSource(messageSource);
-		templateEngine.addDialect(layoutDialect());
+    @Bean
+    public SpringTemplateEngine templateEngine(MessageSource messageSource) {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.setTemplateEngineMessageSource(messageSource);
+        templateEngine.addDialect(layoutDialect());
 
-		return templateEngine;
-	}
+        return templateEngine;
+    }
 
-	@Bean
-	public LayoutDialect layoutDialect() {
-		return new LayoutDialect();
-	}
+    @Bean
+    public LayoutDialect layoutDialect() {
+        return new LayoutDialect();
+    }
 
-	@Bean
-	@Autowired
-	public ViewResolver viewResolver(MessageSource messageSource) {
-		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-		viewResolver.setTemplateEngine(templateEngine(messageSource));
-		viewResolver.setCharacterEncoding("UTF-8");
-		viewResolver.setOrder(0);
-		return viewResolver;
-	}
+    @Bean
+    @Autowired
+    public ViewResolver viewResolver(MessageSource messageSource) {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine(messageSource));
+        viewResolver.setCharacterEncoding("UTF-8");
+        viewResolver.setOrder(0);
+        return viewResolver;
+    }
 }

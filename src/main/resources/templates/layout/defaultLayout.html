@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <div sec:authorize="isAuthenticated()">
+<!--    <div sec:authorize="isAuthenticated()">
         HasRole(ADMIN): <span sec:authorize="hasRole('ADMIN')">YES</span>
-    </div>
+    </div>-->
     <head>
         <th:block th:replace="layout/fragments/commonHead"></th:block>
         <title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE"></title>
