@@ -1,30 +1,24 @@
 package inje.security;
 
-import org.springframework.context.annotation.Bean;
+import inje.security.provider.UserDetailsAuthenticationProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	/*@Autowired
-	private CustomAuthenticationProvider customAuthenticationProvider;*/
+    @Value("${bimserver.address}")
+    private String bimserverAddress;
 
-/*	@Autowired
-	private CustomLoginSuccessHandler customLoginSuccessHandler;*/
-
-/*	@Autowired
-	private AuthenticationFailureHandlerImpl authenticationFailureHandlerImpl;*/
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    @Autowired
+    private UserDetailsAuthenticationProvider userDetailsAuthenticationProvider;
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -49,31 +43,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 								.mvcMatchers("/serviceInterface/**").hasAnyRole("ADMIN", "USER") //내부적으로 접두어 "ROLE_"가 붙는다.
 								.anyRequest()
 								.authenticated();
-//								.antMatchers("/**/**").hasRole("SYSTEM")
-//								.antMatchers("/**/**").hasRole("ADMIN")
-//								.antMatchers("/**/**").hasRole("USER")
-//								.antMatchers("/**/**").hasRole("READ_ONLY");
 
 		http.formLogin().loginPage("/login/loginForm.do")
 						.loginProcessingUrl("/authenticate")
 						.defaultSuccessUrl("/serviceInterface/getAllUsers.do")
 						.usernameParameter("username")
 						.passwordParameter("password");
-						/*.successHandler(customLoginSuccessHandler)*/
-						/*.failureHandler(authenticationFailureHandlerImpl);*/
-
-		/*http.logout().logoutSuccessHandler(logoutSuccessHandlerImpl)
-					 .invalidateHttpSession(true);//세션 삭제 여부*/
-
-		//http.sessionManagement().maximumSessions(1).expiredUrl("/login/loginForm.do?userOver=true");//다중접속 가능한 수 및 다중 접속 시 먼저 접속된 사용자 url
-		//http.exceptionHandling().accessDeniedHandler(accessDeniedHandlerImpl);//권한이 없을경우 handler
-
-		//http.sessionManagement().invalidSessionUrl("/");//세션종료시 로그아웃?
-		//http.exceptionHandling().accessDeniedPage("/accessDeniedPage.do");//권한이 없을경우 이동 url
-/*		http.sessionManagement().sessionAuthenticationErrorUrl("/sessionAuthenticationErrorUrl.do");
-		http.sessionManagement().invalidSessionUrl("/");//세션종료시 로그아웃?
-		http.sessionManagement().maximumSessions(1).expiredUrl("/sessionExpired.do");*/
 	}
 
+    @Override
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+    }
 
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(userDetailsAuthenticationProvider);
+    }
 }

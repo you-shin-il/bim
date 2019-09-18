@@ -8,6 +8,8 @@ import org.bimserver.shared.exceptions.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class AuthInterfaceDao {
 	@Autowired
@@ -19,4 +21,19 @@ public class AuthInterfaceDao {
 		return suser;
 	}
 
+	public SUser getUser(String username) {
+        SUser result = null;
+        try {
+            List<SUser> users = bimServerClient.getServiceInterface().getAllUsers();
+            result = users.stream().filter(x -> x.getUsername().equals(username)).findFirst().get();
+        } catch (ServerException e) {
+            e.printStackTrace();
+        } catch (UserException e) {
+            e.printStackTrace();
+        } catch (PublicInterfaceNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 }

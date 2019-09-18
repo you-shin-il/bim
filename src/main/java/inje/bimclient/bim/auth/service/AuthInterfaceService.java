@@ -13,9 +13,13 @@ public class AuthInterfaceService {
 	@Autowired
 	private AuthInterfaceDao authInterfaceDao;
 
-	/* 전체 사용자 조회 */
+	/* 로그인 */
 	public SUser login(String username, String password) throws UserException, PublicInterfaceNotFoundException, ServerException {
 		return authInterfaceDao.login(username, password);
 	}
 
+    /* 사용자 상세 */
+    public SUser getUser(String username) {
+        return authInterfaceDao.getUser(username);
+    }
 }
