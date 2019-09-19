@@ -1,12 +1,13 @@
 package inje;
 
+import inje.bimserver.BimServerProperties;
 import org.bimserver.client.BimServerClient;
 import org.bimserver.client.json.JsonBimServerClientFactory;
 import org.bimserver.shared.ChannelConnectionException;
 import org.bimserver.shared.UsernamePasswordAuthenticationInfo;
 import org.bimserver.shared.exceptions.BimServerClientException;
 import org.bimserver.shared.exceptions.ServiceException;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
@@ -16,12 +17,8 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(exclude = ErrorMvcAutoConfiguration.class )
 public class BimApplication extends SpringBootServletInitializer {
-    @Value("${bimserver.address}")
-    private String bimserverAddress;
-    @Value("${bimserver.username}")
-    private String bimserverUsername;
-    @Value("${bimserver.password}")
-    private String bimserverPassword;
+    @Autowired
+    BimServerProperties bimServerProperties;
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -32,14 +29,13 @@ public class BimApplication extends SpringBootServletInitializer {
         SpringApplication.run(BimApplication.class, args);
     }
     @Bean
-    public JsonBimServerClientFactory getJsonBimServerClientFactory() throws BimServerClientException {
-        return new JsonBimServerClientFactory(bimserverAddress);
-
+    public JsonBimServerClientFactory jsonBimServerClientFactory() throws BimServerClientException {
+        return new JsonBimServerClientFactory(bimServerProperties.getAddress());
     }
 
     @Bean
-    public BimServerClient getBimServerClient() throws BimServerClientException, ServiceException, ChannelConnectionException {
-        BimServerClient bimServerClient = this.getJsonBimServerClientFactory().create(new UsernamePasswordAuthenticationInfo(bimserverUsername, bimserverPassword));
+    public BimServerClient adminBimServerClient() throws BimServerClientException, ServiceException, ChannelConnectionException {
+        BimServerClient bimServerClient = this.jsonBimServerClientFactory().create(new UsernamePasswordAuthenticationInfo(bimServerProperties.getUsername(), bimServerProperties.getPassword()));
         return bimServerClient;
     }
 
