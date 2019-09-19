@@ -1,4 +1,4 @@
-package inje.bim.notificationInterface.client;
+package inje.bim.client.notificationInterface.client;
 
 import inje.bim.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;

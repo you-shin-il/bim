@@ -1,7 +1,7 @@
 package inje.security.provider;
 
-import inje.bimserver.BimServerProperties;
-import inje.user.LoginUserDetail;
+import inje.bim.server.BimServerProperties;
+import inje.security.LoginUserDetail;
 import org.bimserver.client.BimServerClient;
 import org.bimserver.client.json.JsonBimServerClientFactory;
 import org.bimserver.interfaces.objects.SUser;

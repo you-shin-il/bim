@@ -1,6 +1,6 @@
-package inje.bim.auth.service;
+package inje.bim.client.auth.service;
 
-import inje.bim.auth.client.AuthInterfaceClient;
+import inje.bim.client.auth.client.AuthInterfaceClient;
 import org.bimserver.interfaces.objects.SUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

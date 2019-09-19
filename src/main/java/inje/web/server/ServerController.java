@@ -1,7 +1,7 @@
-package inje.bim.serviceInferface.web;
+package inje.web.server;
 
-import inje.bim.serviceInferface.model.SUserSearch;
-import inje.bim.serviceInferface.service.ServiceInterfaceService;
+import inje.bim.client.serviceInferface.model.SUserSearch;
+import inje.bim.client.serviceInferface.service.ServiceInterfaceService;
 import org.bimserver.interfaces.objects.SUser;
 import org.bimserver.shared.exceptions.PublicInterfaceNotFoundException;
 import org.bimserver.shared.exceptions.ServiceException;
@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * ServiceInterface Controller
+ * ServerController
  *
  * @author  유신일
- * @since	2019. 09. 10.
+ * @since	2019. 09. 19.
  * @version 1.0
  * @see
  *
@@ -27,11 +27,11 @@ import java.util.Optional;
  *
  *      수정일        수정자    수정내용
  *  -------------  ------   ------
- *  2019. 09. 10.   유신일    최초 생성
+ *  2019. 09. 19.   유신일    최초 생성
  *  </pre>
  */
 @Controller
-public class ServiceInterfaceController {
+public class ServerController {
     @Autowired
     private ServiceInterfaceService serviceInterfaceService;
 
@@ -44,13 +44,13 @@ public class ServiceInterfaceController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/serviceInterface/getAllUsers.do")
+    @RequestMapping(value = "/server/serviceInterface/getAllUsers.do")
     public String getAllUsers(ModelMap model, SUserSearch searchSUser) throws ServiceException, PublicInterfaceNotFoundException {
         List<SUser> result = serviceInterfaceService.getAllUsers(searchSUser);
 
         model.addAttribute("result", result);
         model.addAttribute("searchSUser", searchSUser);
-        return "serviceInterface/getAllUsers";
+        return "server/serviceInterface/getAllUsers";
     }
 
     /**
@@ -62,13 +62,13 @@ public class ServiceInterfaceController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/serviceInterface/userDetail.do")
+    @RequestMapping(value = "/server/serviceInterface/userDetail.do")
     public String userDetail(ModelMap model, SUserSearch searchSUser) throws ServiceException, PublicInterfaceNotFoundException {
         Optional<SUser> result = serviceInterfaceService.userDetail(searchSUser.getOid());
 
         //model.addAttribute("result", result);
         model.addAttribute("searchSUser", searchSUser);
-        return "userDetailView";
+        return "server/serviceInterface/userDetailView";
     }
 
     /**
@@ -81,13 +81,13 @@ public class ServiceInterfaceController {
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping(value = "/serviceInterface/deleteUser.do")
+    @RequestMapping(value = "/server/serviceInterface/deleteUser.do")
     public boolean deleteUser(ModelMap model, SUserSearch searchSUser, Long oid) throws ServiceException, PublicInterfaceNotFoundException {
         return serviceInterfaceService.deleteUser(oid);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/serviceInterface/unDeleteUser.do")
+    @RequestMapping(value = "/server/serviceInterface/unDeleteUser.do")
     public boolean unDeleteUser(ModelMap model, SUserSearch searchSUser, Long oid) throws ServiceException, PublicInterfaceNotFoundException {
         return serviceInterfaceService.deleteUser(oid);
     }
@@ -102,7 +102,7 @@ public class ServiceInterfaceController {
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping(value = "/serviceInterface/addUser.do")
+    @RequestMapping(value = "/server/serviceInterface/addUser.do")
     public boolean addUser(ModelMap model, SUserSearch searchSUser, Long oid) throws ServiceException, PublicInterfaceNotFoundException {
         return serviceInterfaceService.deleteUser(oid);
     }
@@ -116,11 +116,11 @@ public class ServiceInterfaceController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/serviceInterface/addUserView.do")
+    @RequestMapping(value = "/server/serviceInterface/addUserView.do")
     public String addUserView(ModelMap model, SUser sUser, SUserSearch searchSUser) throws ServiceException, PublicInterfaceNotFoundException {
         model.addAttribute("sUser", sUser);
         model.addAttribute("searchSUser", searchSUser);
-        return "serviceInterface/addUserView";
+        return "server/serviceInterface/addUserView";
     }
 
     /**
@@ -132,16 +132,16 @@ public class ServiceInterfaceController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/serviceInterface/userDetailView.do")
+    @RequestMapping(value = "/server/serviceInterface/userDetailView.do")
     public String userDetailView(ModelMap model, SUserSearch searchSUser) throws ServiceException, PublicInterfaceNotFoundException {
         model.addAttribute("searchSUser", searchSUser);
         Optional<SUser> result = serviceInterfaceService.userDetail(searchSUser.getOid());
 
         if(!result.isPresent()) {
-            return "redirect:/serviceInterface/getAllUsers";
+            return "redirect:server/serviceInterface/getAllUsers";
         } else {
             model.addAttribute("sUser", result.get());
-            return "serviceInterface/userDetailView";
+            return "server/serviceInterface/userDetailView";
         }
     }
 }

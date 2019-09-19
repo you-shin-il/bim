@@ -1,4 +1,4 @@
-package inje.bim.admin.web;
+package inje.bim.client.admin.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

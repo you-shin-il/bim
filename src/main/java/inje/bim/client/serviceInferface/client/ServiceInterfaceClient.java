@@ -1,4 +1,4 @@
-package inje.bim.serviceInferface.client;
+package inje.bim.client.serviceInferface.client;
 
 import inje.bim.client.Client;
 import org.bimserver.interfaces.objects.SExtendedData;

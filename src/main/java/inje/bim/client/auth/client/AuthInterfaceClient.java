@@ -1,4 +1,4 @@
-package inje.bim.auth.client;
+package inje.bim.client.auth.client;
 
 import inje.bim.client.Client;
 import org.bimserver.interfaces.objects.SUser;

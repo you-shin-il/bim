@@ -1,6 +1,6 @@
-package inje.bim.auth.web;
+package inje.bim.client.auth.web;
 
-import inje.bim.auth.service.AuthInterfaceService;
+import inje.bim.client.auth.service.AuthInterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 

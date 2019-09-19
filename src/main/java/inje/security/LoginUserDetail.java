@@ -1,4 +1,4 @@
-package inje.user;
+package inje.security;
 
 import org.bimserver.client.BimServerClient;
 import org.bimserver.interfaces.objects.SUser;
