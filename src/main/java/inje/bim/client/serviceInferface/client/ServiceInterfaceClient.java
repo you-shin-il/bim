@@ -1,10 +1,7 @@
 package inje.bim.client.serviceInferface.client;
 
 import inje.bim.client.Client;
-import org.bimserver.interfaces.objects.SExtendedData;
-import org.bimserver.interfaces.objects.SRevision;
-import org.bimserver.interfaces.objects.SRevisionSummary;
-import org.bimserver.interfaces.objects.SUser;
+import org.bimserver.interfaces.objects.*;
 import org.bimserver.shared.exceptions.PublicInterfaceNotFoundException;
 import org.bimserver.shared.exceptions.ServerException;
 import org.bimserver.shared.exceptions.ServiceException;
@@ -61,6 +58,10 @@ public class ServiceInterfaceClient {
 
     public SRevisionSummary getRevisionSummary(Long aLong) throws PublicInterfaceNotFoundException, ServerException, UserException {
         return bimServerClient.getBimServerClient().getServiceInterface().getRevisionSummary(aLong);
+    }
+
+    public List<SProject> getUsersProjects(Long aLong) throws PublicInterfaceNotFoundException, ServerException, UserException {
+        return bimServerClient.getBimServerClient().getServiceInterface().getUsersProjects(aLong);
     }
 
 }

@@ -2,9 +2,13 @@ package inje.bim.client.serviceInferface.service;
 
 import inje.bim.client.serviceInferface.client.ServiceInterfaceClient;
 import inje.bim.client.serviceInferface.model.SUserSearch;
+import org.bimserver.interfaces.objects.SProject;
+import org.bimserver.interfaces.objects.SRevision;
 import org.bimserver.interfaces.objects.SUser;
 import org.bimserver.shared.exceptions.PublicInterfaceNotFoundException;
+import org.bimserver.shared.exceptions.ServerException;
 import org.bimserver.shared.exceptions.ServiceException;
+import org.bimserver.shared.exceptions.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -95,5 +99,25 @@ public class ServiceInterfaceService {
      */
     public Boolean unDeleteUser(Long oid) throws PublicInterfaceNotFoundException, ServiceException {
         return serviceInterfaceClient.unDeleteUser(oid);
+    }
+
+    /**
+     * 사용자 프로젝트 조회
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    public List<SProject> getUsersProjects(Long oid) throws PublicInterfaceNotFoundException, ServerException, UserException {
+        return serviceInterfaceClient.getUsersProjects(oid);
+    }
+
+    /**
+     * 사용자 프로젝트 모든 revison 조회
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    public List<SRevision> getAllRevisionsOfProject(Long oid) throws PublicInterfaceNotFoundException, ServerException, UserException {
+        return serviceInterfaceClient.getAllRevisionsOfProject(oid);
     }
 }
