@@ -6,10 +6,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
-public class LoginUserDetail implements UserDetails {
+public class LoginUserDetail implements UserDetails, Serializable {
     private BimServerClient bimServerClient;
     private SUser suser;
     private String username;

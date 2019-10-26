@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/defaultLayout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>계약현황에 대한 물품 조회</title>
+</head>
+<div id="wrap" class="main">
+    <th:block th:replace="layout/fragments/commonHeader"></th:block>
+</div>
+<body>
+    <th:block layout:fragment="content">
+        <script>
+            function fn_movePage(pageNo) {
+                $("#openApiRequestVO input[name='pageNo']").val(pageNo);
+	            fn_search();
+            }
+            function fn_search() {
+	            $("#openApiRequestVO").attr("action", "/openapi/cntrctInfo/cntrctInfoListThng.do");
+	            $("#openApiRequestVO").submit();
+            }
+            $(document).ready(function() {
+                $("#searchInqryEndDt").datepicker({
+                    minDate : $("#searchInqryBgnDt").val(),
+                    onClose: function ( selectedDate ) {
+                        $("#searchInqryBgnDt").datepicker( "option", "maxDate", selectedDate );
+                    }
+                });
+
+                $("#searchInqryBgnDt").datepicker({
+                    maxDate : $("#searchInqryEndDt").val(),
+                    onClose: function ( selectedDate ) {
+                        $("#searchInqryEndDt").datepicker( "option", "minDate", selectedDate );
+                    }
+                });
+            });
+        </script>
+<!--        <div style="width:1350px;margin:0 auto;text-align:center;padding:30px;font-size:20px;">-->
+<!--            <form id="searchSUser" name="searchSUser" method="POST">-->
+<!--                <input type="hidden" id="oid" name="oid" th:value="${searchSUser.oid}"/>-->
+<!--                <label for="name">name</label>          <input id="name"        type="text" name="name"     th:value="${searchSUser.name}" />-->
+<!--                <label for="username">username</label>  <input id="username"    type="text" name="username" th:value="${searchSUser.username}" />-->
+<!--                <label for="userType">type</label>-->
+<!--                <select id="userType" name="userType">-->
+<!--                    <option value="-1" th:selected="${searchSUser.userType == -1}">전체</option>-->
+<!--                    <option value="0"  th:selected="${searchSUser.userType ==  0}">SYSTEM</option>-->
+<!--                    <option value="1"  th:selected="${searchSUser.userType ==  1}">ADMIN</option>-->
+<!--                    <option value="2"  th:selected="${searchSUser.userType ==  2}">USER</option>-->
+<!--                    <option value="3"  th:selected="${searchSUser.userType ==  3}">READ_ONLY</option>-->
+<!--                </select>-->
+<!--                <label for="state">state</label>-->
+<!--                <select id="state" name="state">-->
+<!--                    <option value="-1" th:selected="${searchSUser.state  == -1}">전체</option>-->
+<!--                    <option value="0"  th:selected="${searchSUser.state  ==  0}">active</option>-->
+<!--                    <option value="1"  th:selected="${searchSUser.state  ==  1}">deleted</option>-->
+<!--                </select>-->
+<!--                <button class="btn btn-secondary" type="submit">검색</button>-->
+<!--                <sec:csrfInput />-->
+<!--            </form>-->
+<!--        </span>-->
+<!--            <br/><br/>-->
+<!--            <div style="float:left;">-->
+<!--                &lt;!&ndash;<p>총 건</p>&ndash;&gt;-->
+<!--                <p th:text="'총 ' + ${#lists.size(result)} + ' 건'"/>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div style="width:1350px;margin:0 auto;text-align:center;padding:30px;font-size:20px;">
+            <form id="openApiRequestVO" name="openApiRequestVO" method="POST">
+                <input type="hidden" name="pageNo" th:value="${openApiRequestVO.pageNo}"/>
+                <label for="searchInqryBgnDt">등록일자</label>&nbsp;<input type="text" size="5" id="searchInqryBgnDt" name="inqryBgnDt" th:value="${openApiRequestVO.inqryBgnDt}" readonly="readonly">&nbsp;~&nbsp;<input type="text" id="searchInqryEndDt" name="inqryEndDt" size="5" th:value="${openApiRequestVO.inqryEndDt}" readonly="readonly">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button" onclick="fn_search();">검색</button>
+                </span>
+            </form>
+        </div>
+        <div id="container" style="width:1380px;margin:0 auto;">
+            <div>
+                <table style="border-top:1px solid #dedede">
+                    <colgroup>
+                        <col width="20px" />
+                        <col width="152px" />
+                        <col width="132px" />
+                        <col width="172px" />
+                        <col width="152px" />
+                        <col width="202px" />
+                        <col width="152px" />
+                        <col width="152px" />
+                        <col width="121px" />
+                        <col width="121px" />
+                    </colgroup>
+                    <tbody>
+                        <tr style="background-color:rgba(28, 148, 196, 1);border-top:1px solid #dedede;font-size:18px;">
+                            <th style="text-align:center;border-left:1px solid #dedede;">번호</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">통합계약번호</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">업무구분명</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">확정계약번호</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">계약참조번호</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">계약명</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">공동계약여부</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">장기계속구분명</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">계약체결일자</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;border-right:1px solid #dedede;">등록일시</th>
+                        </tr>
+                        <tr th:each="list,index : ${result.response.body.items}">
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${(openApiRequestVO.pageNo -1) * openApiRequestVO.numOfRows + index.count}" />
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.untyCntrctNo}" th:href="#{/serviceInterface/userDetail.do}" />
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.bsnsDivNm}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.dcsnCntrctNo}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.cntrctRefNo}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.cntrctNm}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.cmmnCntrctYn}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.lngtrmCtnuDivNm}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.cntrctCnclsDate}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;border-right:1px solid #dedede;text-align:center;" th:text="${list.rgstDt}"/>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--<%@ include file="/WEB-INF/jsp/web/cmm/paging.jsp"%>-->
+        </div>
+
+        <div style="text-align:center;padding:30px;">
+            <ul class="pagination pagination-lg" style="width:1400px;margin:0 auto;display:inline-block;">
+                <li th:if="${result.response.body.pageNo > 10}" style="display:inline-block;background-color:#5a85ec;padding:10px;">
+                    <a th:href="|javascript:fn_movePage(${result.response.body.startPage - 1});|">
+                        <span aria-hidden="true" style="font-size:10px;">＜</span>
+                    </a>
+                </li>
+                <li th:each="i : ${#numbers.sequence(result.response.body.startPage, result.response.body.endPage)}" style="display:inline-block;background-color:#5a85ec;padding:10px;">
+                    <a th:if="${result.response.body.pageNo == i}" href="#" style="cursor:default;color:black;">
+                        <span th:text="${i}"></span>
+                    </a>
+                    <a th:if="${result.response.body.pageNo != i}" th:href="|javascript:fn_movePage(${i});|">
+                        <span th:text="${i}"></span>
+                    </a>
+                </li>
+                <li th:if="${result.response.body.endPage < result.response.body.totalPage}" style="display:inline-block;background-color:#5a85ec;padding:10px;">
+                    <a th:href="|javascript:fn_movePage(${result.response.body.endPage + 1});|">
+                        <span aria-hidden="true" style="font-size:10px;">＞</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </th:block>
+</body>
+</html>

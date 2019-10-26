@@ -3,6 +3,7 @@ package inje.bim.client.serviceInferface.service;
 import inje.bim.client.serviceInferface.client.ServiceInterfaceClient;
 import inje.bim.client.serviceInferface.model.SUserSearch;
 import org.bimserver.interfaces.objects.SProject;
+import org.bimserver.interfaces.objects.SProjectSmall;
 import org.bimserver.interfaces.objects.SRevision;
 import org.bimserver.interfaces.objects.SUser;
 import org.bimserver.shared.exceptions.PublicInterfaceNotFoundException;
@@ -119,5 +120,15 @@ public class ServiceInterfaceService {
      */
     public List<SRevision> getAllRevisionsOfProject(Long oid) throws PublicInterfaceNotFoundException, ServerException, UserException {
         return serviceInterfaceClient.getAllRevisionsOfProject(oid);
+    }
+
+    /**
+     * 모든 관련 프로젝트 조회
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    public List<SProjectSmall> getAllRelatedProjects(Long oid) throws PublicInterfaceNotFoundException, ServerException, UserException {
+        return serviceInterfaceClient.getAllRelatedProjects(oid);
     }
 }

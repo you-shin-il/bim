@@ -34,9 +34,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		    USER(2),
 		    READ_ONLY(3);
 		* */
-		//http.csrf().disable().authorizeRequests()
+		http.csrf().disable().authorizeRequests();
 		http.authorizeRequests().mvcMatchers("/login/**", "/css/**", "/js/**", "/img/**").permitAll()
 								.mvcMatchers("/serviceInterface/**").hasAnyRole("ADMIN", "USER") //내부적으로 접두어 "ROLE_"가 붙는다.
+                                .mvcMatchers("/project/**").hasAnyRole("ADMIN", "USER") //내부적으로 접두어 "ROLE_"가 붙는다.
+                                .mvcMatchers("/openapi/**").hasAnyRole("ADMIN", "USER") //내부적으로 접두어 "ROLE_"가 붙는다.
 								.anyRequest()
 								.authenticated();
 

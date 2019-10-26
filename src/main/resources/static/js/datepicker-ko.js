@@ -25,7 +25,7 @@ datepicker.regional.ko = {
 	dayNamesShort: [ "일","월","화","수","목","금","토" ],
 	dayNamesMin: [ "일","월","화","수","목","금","토" ],
 	weekHeader: "주",
-	dateFormat: "yy. m. d.",
+	dateFormat: "yymmdd",
 	firstDay: 0,
 	isRTL: false,
 	showMonthAfterYear: true,

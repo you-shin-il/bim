@@ -64,4 +64,7 @@ public class ServiceInterfaceClient {
         return bimServerClient.getBimServerClient().getServiceInterface().getUsersProjects(aLong);
     }
 
+    public List<SProjectSmall> getAllRelatedProjects(Long aLong) throws PublicInterfaceNotFoundException, ServerException, UserException {
+        return bimServerClient.getBimServerClient().getServiceInterface().getAllRelatedProjects(aLong);
+    }
 }

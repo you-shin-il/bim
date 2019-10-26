@@ -60,10 +60,10 @@ public class ProjectController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/project/detail/detailTap.do")
-    public String detailTap(ModelMap model, @RequestParam("oid") Long aLong) throws ServiceException, PublicInterfaceNotFoundException {
+    @RequestMapping(value = "/project/projectDetailView.do")
+    public String projectDetailView(ModelMap model, @RequestParam("oid") Long aLong) throws ServiceException, PublicInterfaceNotFoundException {
         model.addAttribute("oid", aLong);
-        return "project/detail/detailTap";
+        return "project/projectDetailView";
     }
 
     /**
