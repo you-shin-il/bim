@@ -40,6 +40,20 @@ public class OpenApiResponseItems {
     private String d2bMngBidMthdNm;
     private String d2bMngDcsnNo;
 
+    private String prdctClsfcNo;
+    private String prdctIdntNo;
+    private String prdctClsfcNoNm;
+    private String krnPrdctNm;
+    private String orgplceCd;
+    private String orgplceNm;
+    private String qtyUprcAmt;
+    private String prdctQty;
+    private String prdctAmt;
+    private String dlvryCndtnCd;
+    private String dlvryCndtnNm;
+    private String dlvrDaynum;
+    private String dlvrTmlmt;
+
     public String getUntyCntrctNo() {
         return untyCntrctNo;
     }
@@ -342,5 +356,109 @@ public class OpenApiResponseItems {
 
     public void setD2bMngDcsnNo(String d2bMngDcsnNo) {
         this.d2bMngDcsnNo = d2bMngDcsnNo;
+    }
+
+    public String getPrdctClsfcNo() {
+        return prdctClsfcNo;
+    }
+
+    public void setPrdctClsfcNo(String prdctClsfcNo) {
+        this.prdctClsfcNo = prdctClsfcNo;
+    }
+
+    public String getPrdctIdntNo() {
+        return prdctIdntNo;
+    }
+
+    public void setPrdctIdntNo(String prdctIdntNo) {
+        this.prdctIdntNo = prdctIdntNo;
+    }
+
+    public String getPrdctClsfcNoNm() {
+        return prdctClsfcNoNm;
+    }
+
+    public void setPrdctClsfcNoNm(String prdctClsfcNoNm) {
+        this.prdctClsfcNoNm = prdctClsfcNoNm;
+    }
+
+    public String getKrnPrdctNm() {
+        return krnPrdctNm;
+    }
+
+    public void setKrnPrdctNm(String krnPrdctNm) {
+        this.krnPrdctNm = krnPrdctNm;
+    }
+
+    public String getOrgplceCd() {
+        return orgplceCd;
+    }
+
+    public void setOrgplceCd(String orgplceCd) {
+        this.orgplceCd = orgplceCd;
+    }
+
+    public String getOrgplceNm() {
+        return orgplceNm;
+    }
+
+    public void setOrgplceNm(String orgplceNm) {
+        this.orgplceNm = orgplceNm;
+    }
+
+    public String getQtyUprcAmt() {
+        return qtyUprcAmt;
+    }
+
+    public void setQtyUprcAmt(String qtyUprcAmt) {
+        this.qtyUprcAmt = qtyUprcAmt;
+    }
+
+    public String getPrdctQty() {
+        return prdctQty;
+    }
+
+    public void setPrdctQty(String prdctQty) {
+        this.prdctQty = prdctQty;
+    }
+
+    public String getPrdctAmt() {
+        return prdctAmt;
+    }
+
+    public void setPrdctAmt(String prdctAmt) {
+        this.prdctAmt = prdctAmt;
+    }
+
+    public String getDlvryCndtnCd() {
+        return dlvryCndtnCd;
+    }
+
+    public void setDlvryCndtnCd(String dlvryCndtnCd) {
+        this.dlvryCndtnCd = dlvryCndtnCd;
+    }
+
+    public String getDlvryCndtnNm() {
+        return dlvryCndtnNm;
+    }
+
+    public void setDlvryCndtnNm(String dlvryCndtnNm) {
+        this.dlvryCndtnNm = dlvryCndtnNm;
+    }
+
+    public String getDlvrDaynum() {
+        return dlvrDaynum;
+    }
+
+    public void setDlvrDaynum(String dlvrDaynum) {
+        this.dlvrDaynum = dlvrDaynum;
+    }
+
+    public String getDlvrTmlmt() {
+        return dlvrTmlmt;
+    }
+
+    public void setDlvrTmlmt(String dlvrTmlmt) {
+        this.dlvrTmlmt = dlvrTmlmt;
     }
 }

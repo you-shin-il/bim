@@ -4,7 +4,7 @@
       layout:decorator="layout/defaultLayout"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>계약현황에 대한 물품 조회</title>
+    <title>나라장터 계약현황에 대한 물품 조회</title>
 </head>
 <div id="wrap" class="main">
     <th:block th:replace="layout/fragments/commonHeader"></th:block>
@@ -14,16 +14,17 @@
         <script>
             function fn_movePage(pageNo) {
                 $("#openApiRequestVO input[name='pageNo']").val(pageNo);
-	            $("#openApiRequestVO").attr("action", "/openapi/cntrctInfo/cntrctInfoListThng.do");
-	            $("#openApiRequestVO").submit();
+                $("#openApiRequestVO").attr("action", "/openapi/cntrctInfo/cntrctInfoListThngPPSSrch.do");
+                $("#openApiRequestVO").submit();
             }
             function fn_search() {
-	            $("#openApiRequestVO input[name='pageNo']").val(1);
-	            $("#openApiRequestVO").attr("action", "/openapi/cntrctInfo/cntrctInfoListThng.do");
-	            $("#openApiRequestVO").submit();
+                $("#openApiRequestVO input[name='pageNo']").val(1);
+                $("#openApiRequestVO").attr("action", "/openapi/cntrctInfo/cntrctInfoListThngPPSSrch.do");
+                $("#openApiRequestVO").submit();
             }
             function fn_moveDetail(pageNo) {
-	            $("#openApiRequestVO input[name='pageNo']").val(pageNo);
+                $("#openApiRequestVO").attr("action", "/openapi/cntrctInfo/cntrctInfoListThngPPSSrch.do");
+                $("#openApiRequestVO").submit();
             }
             $(document).ready(function() {
                 $("#searchInqryEndDt").datepicker({

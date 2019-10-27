@@ -4,7 +4,7 @@
       layout:decorator="layout/defaultLayout"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>계약현황에 대한 물품 조회</title>
+    <title>계약현황에 대한 물품 세부 조회</title>
 </head>
 <div id="wrap" class="main">
     <th:block th:replace="layout/fragments/commonHeader"></th:block>
@@ -14,12 +14,12 @@
         <script>
             function fn_movePage(pageNo) {
                 $("#openApiRequestVO input[name='pageNo']").val(pageNo);
-	            $("#openApiRequestVO").attr("action", "/openapi/cntrctInfo/cntrctInfoListThng.do");
+	            $("#openApiRequestVO").attr("action", "/openapi/cntrctInfo/cntrctInfoListThngDetail.do");
 	            $("#openApiRequestVO").submit();
             }
             function fn_search() {
 	            $("#openApiRequestVO input[name='pageNo']").val(1);
-	            $("#openApiRequestVO").attr("action", "/openapi/cntrctInfo/cntrctInfoListThng.do");
+	            $("#openApiRequestVO").attr("action", "/openapi/cntrctInfo/cntrctInfoListThngDetail.do");
 	            $("#openApiRequestVO").submit();
             }
             function fn_moveDetail(pageNo) {
@@ -83,14 +83,14 @@
             <div>
                 <table style="border-top:1px solid #dedede">
                     <colgroup>
-                        <col width="20px" />
+                        <col th:width="20px" />
                         <col width="152px" />
-                        <col width="132px" />
                         <col width="172px" />
                         <col width="152px" />
+                        <col width="162px" />
                         <col width="202px" />
                         <col width="152px" />
-                        <col width="152px" />
+                        <col width="122px" />
                         <col width="121px" />
                         <col width="121px" />
                     </colgroup>
@@ -98,27 +98,27 @@
                         <tr style="height:50px;background-color:rgba(28, 148, 196, 1);border-top:1px solid #dedede;font-size:18px;">
                             <th style="text-align:center;border-left:1px solid #dedede;">번호</th>
                             <th style="text-align:center;border-left:1px solid #dedede;">통합계약번호</th>
-                            <th style="text-align:center;border-left:1px solid #dedede;">업무구분명</th>
                             <th style="text-align:center;border-left:1px solid #dedede;">확정계약번호</th>
                             <th style="text-align:center;border-left:1px solid #dedede;">계약참조번호</th>
-                            <th style="text-align:center;border-left:1px solid #dedede;">계약명</th>
-                            <th style="text-align:center;border-left:1px solid #dedede;">공동계약여부</th>
-                            <th style="text-align:center;border-left:1px solid #dedede;">장기계속구분명</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">품명</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">한글품목명</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">수량단가금액</th>
+                            <th style="text-align:center;border-left:1px solid #dedede;">물품수량</th>
                             <th style="text-align:center;border-left:1px solid #dedede;">계약체결일자</th>
                             <th style="text-align:center;border-left:1px solid #dedede;border-right:1px solid #dedede;">등록일시</th>
                         </tr>
                         <tr th:if="${result.response.body.totalCount == 0}" style="font-size:18px;text-align:center;">
                             <td colspan="10" style="border:1px solid #dedede;">검색된 결과가 없습니다.</td>
                         </tr>
-                        <tr th:each="list,index : ${result.response.body.items}">
+                        <tr th:each="list,index : ${result.response.body.items}" style="height:50px;">
                             <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${(openApiRequestVO.pageNo -1) * openApiRequestVO.numOfRows + index.count}" />
                             <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.untyCntrctNo}" />
-                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.bsnsDivNm}"/>
                             <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.dcsnCntrctNo}"/>
                             <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.cntrctRefNo}"/>
-                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.cntrctNm}"/>
-                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.cmmnCntrctYn}"/>
-                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.lngtrmCtnuDivNm}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.prdctClsfcNoNm}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:left;text-overflow: ellipsis;overflow:hidden;" th:text="${list.krnPrdctNm}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.qtyUprcAmt}"/>
+                            <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.prdctQty}"/>
                             <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;text-align:center;" th:text="${list.cntrctCnclsDate}"/>
                             <td style="padding:9px 10px 8px 10px;border-bottom:1px solid #dedede;border-left:1px solid #dedede;border-right:1px solid #dedede;text-align:center;" th:text="${list.rgstDt}"/>
                         </tr>

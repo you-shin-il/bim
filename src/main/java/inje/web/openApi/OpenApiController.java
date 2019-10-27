@@ -12,6 +12,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -44,13 +46,31 @@ public class OpenApiController {
      * @throws Exception
      */
     @RequestMapping(value = "/openapi/cntrctInfo/cntrctInfoListThng.do")
-    public String cntrctInfoListThng(ModelMap model, @ModelAttribute OpenApiRequestVO openApiRequestVO) throws ServiceException, PublicInterfaceNotFoundException {
-        OpenApiResponseVO result = openApiService.get(openApiRequestVO, "getCntrctInfoListThng");
+    public String cntrctInfoListThng(ModelMap model, @ModelAttribute OpenApiRequestVO openApiRequestVO) throws UnsupportedEncodingException, URISyntaxException {
+        OpenApiResponseVO result = openApiService.getCntrctInfoListThng(openApiRequestVO);
 
         model.addAttribute("result", result);
         model.addAttribute("openApiRequestVO", openApiRequestVO);
 
         return "openapi/cntrctInfo/cntrctInfoListThng";
+    }
+
+    /**
+     * 계약현황에 대한 물품세부 조회
+     *
+     * @param model
+     * @param openApiRequestVO
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/openapi/cntrctInfo/cntrctInfoListThngDetail.do")
+    public String cntrctInfoListThngDetail(ModelMap model, @ModelAttribute OpenApiRequestVO openApiRequestVO) throws UnsupportedEncodingException, URISyntaxException {
+        OpenApiResponseVO result = openApiService.getCntrctInfoListThngDetail(openApiRequestVO);
+
+        model.addAttribute("result", result);
+        model.addAttribute("openApiRequestVO", openApiRequestVO);
+
+        return "openapi/cntrctInfo/cntrctInfoListThngDetail";
     }
 
     /**
@@ -62,8 +82,8 @@ public class OpenApiController {
      * @throws Exception
      */
     @RequestMapping(value = "/openapi/cntrctInfo/cntrctInfoListThngPPSSrch.do")
-    public String cntrctInfoListThngPPSSrch(ModelMap model, @ModelAttribute OpenApiRequestVO openApiRequestVO) throws ServiceException, PublicInterfaceNotFoundException {
-        OpenApiResponseVO result = openApiService.get(openApiRequestVO, "getCntrctInfoListThngPPSSrch");
+    public String cntrctInfoListThngPPSSrch(ModelMap model, @ModelAttribute OpenApiRequestVO openApiRequestVO) throws UnsupportedEncodingException, URISyntaxException {
+        OpenApiResponseVO result = openApiService.getCntrctInfoListThngPPSSrch(openApiRequestVO);
 
         model.addAttribute("result", result);
         model.addAttribute("openApiRequestVO", openApiRequestVO);

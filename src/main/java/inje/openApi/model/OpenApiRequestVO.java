@@ -35,7 +35,6 @@ public class OpenApiRequestVO {
     */
     private int untyCntrctNo;
 
-
     public int getNumOfRows() {
         return numOfRows;
     }
