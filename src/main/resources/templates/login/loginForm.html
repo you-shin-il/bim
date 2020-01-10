@@ -1,24 +1,132 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head>
-        <th:block th:replace="layout/fragments/commonHead"></th:block>
-    </head>
-    <body>
-        <div id="wrap">
-            <div id="container" class="login">
-                <div id="loginForm">
-                    <h2><a href="/"><img src="/images/logo.png" alt="bim"></a></h2>
-                    <form id="flogin" method="POST" th:action="@{/authenticate}">
-                        <fieldset>
-                            <div id="loginFormBox">
-                                <input type="text" 		name="username" placeholder="아이디(이메일주소)">
-                                <input type="password" 	name="password" placeholder="비밀번호" onkeypress="if(event.keyCode==13)document.getElementById('flogin').submit();">
-                                <input type="submit" value="로그인">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Login</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+<div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <!--<div class="col-lg-6 d-none d-lg-block bg-login-image"></div>-->
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                </div>
+                                <form id="login" class="user" method="POST" th:action="@{/authenticate}">
+                                    <input type="text"      name="username" class="form-control form-control-user" id="exampleInputEmail" placeholder="아이디(이메일주소)">
+                                    <input type="password"  name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="비밀번호" onkeypress="if(event.keyCode==13)document.getElementById('flogin').submit();">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox small">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                                            <label class="custom-control-label" for="customCheck">Remember Me</label>
+                                        </div>
+                                    </div>
+                                    <a href="#" onclick="document.getElementById('login').submit();" class="btn btn-primary btn-user btn-block">
+                                        Login
+                                    </a>
+                                    <hr>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="#" onclick="fn_passwordReset();">비밀번호 초기화</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" href="register.html">사용자 생성</a>
+                                </div>
                             </div>
-                        </fieldset>
-                    </form>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
-    </body>
+
+    </div>
+
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
+<script src="/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="/bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="/bootstrap/js/sb-admin-2.min.js"></script>
+<script>
+    function fn_passwordReset() {
+	    var w = 600;//가로크기
+	    var h = 420;//세로크기
+
+	    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : window.screenX;
+	    var dualScreenTop = window.screenTop != undefined ? window.screenTop : window.screenY;
+
+	    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+	    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+	    var systemZoom = width / window.screen.availWidth;
+	    var left = (width - w) / 2 / systemZoom + dualScreenLeft;
+	    var top = (height - h) / 2 / systemZoom + dualScreenTop;
+
+	    window.open('/user/passwordResetPopup.do', '비밀번호 초기화', 'scrollbars=yes, width=' + w / systemZoom + ', height=' + h / systemZoom + ', top=' + top + ', left=' + left);
+    }
+
+    function fn_userCreate() {
+	    console.log("fn_userCreate");
+    }
+</script>
+</body>
+
 </html>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<!--    <head>-->
+<!--        <th:block th:replace="layout/fragments/commonHead"></th:block>-->
+<!--    </head>-->
+<!--    <body>-->
+<!--        <div id="wrap">-->
+<!--            <div id="container" class="login">-->
+<!--                <div id="loginForm">-->
+<!--                    <h2><a href="/"><img src="/images/logo.png" alt="bim"></a></h2>-->
+<!--                    <form id="flogin" method="POST" th:action="@{/authenticate}">-->
+<!--                        <fieldset>-->
+<!--                            <div id="loginFormBox">-->
+<!--                                <input type="text" 		name="username" placeholder="아이디(이메일주소)">-->
+<!--                                <input type="password" 	name="password" placeholder="비밀번호" onkeypress="if(event.keyCode==13)document.getElementById('flogin').submit();">-->
+<!--                                <input type="submit" value="로그인">-->
+<!--                            </div>-->
+<!--                        </fieldset>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </body>-->
+<!--</html>-->
