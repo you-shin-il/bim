@@ -7,7 +7,8 @@ import org.bimserver.client.json.JsonBimServerClientFactory;
 import org.bimserver.interfaces.objects.SUser;
 import org.bimserver.shared.ChannelConnectionException;
 import org.bimserver.shared.UsernamePasswordAuthenticationInfo;
-import org.bimserver.shared.exceptions.*;
+import org.bimserver.shared.exceptions.BimServerClientException;
+import org.bimserver.shared.exceptions.ServiceException;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +27,7 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
     @Autowired
     BimServerProperties bimServerProperties;
 
-    private BimServerClient loginUserBimServerClient;
+    //private BimServerClient loginUserBimServerClient;
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
@@ -39,12 +40,12 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
 
         try {
             String password = (String) authentication.getCredentials();
-            userBimServerClient(username, password);
-            loginUserBimServerClient.getAuthInterface().getLoggedInUser();
-            SUser suser = getLoggedInUser();
+            BimServerClient bimServerClient = userBimServerClient(username, password);
+            SUser suser = bimServerClient.getAuthInterface().getLoggedInUser();
             ArrayList<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
             authorities.add(new SimpleGrantedAuthority("ROLE_" + suser.getUserType().name()));
-            userDetail = new LoginUserDetail(loginUserBimServerClient, suser, username, password, authorities, true);
+            userDetail = new LoginUserDetail(bimServerClient, suser, username, password, authorities, true);
         } catch(Exception e) {
             log.error(e.getMessage());
             throw new AccountNotConfirmedException(e.getMessage());
@@ -53,14 +54,14 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
         return userDetail;
     }
 
-    private void userBimServerClient(String username, String password) throws BimServerClientException, ServiceException, ChannelConnectionException {
+    private BimServerClient userBimServerClient(String username, String password) throws BimServerClientException, ServiceException, ChannelConnectionException {
         JsonBimServerClientFactory factory = new JsonBimServerClientFactory(bimServerProperties.getAddress());
-        loginUserBimServerClient = factory.create(new UsernamePasswordAuthenticationInfo(username, password));
+        return factory.create(new UsernamePasswordAuthenticationInfo(username, password));
     }
 
-    private SUser getLoggedInUser() throws PublicInterfaceNotFoundException, ServerException, UserException {
+/*    private SUser getLoggedInUser() throws PublicInterfaceNotFoundException, ServerException, UserException {
         return loginUserBimServerClient.getAuthInterface().getLoggedInUser();
-    }
+    }*/
 
     public static class AccountNotConfirmedException extends AuthenticationException {
         public AccountNotConfirmedException(String message) {

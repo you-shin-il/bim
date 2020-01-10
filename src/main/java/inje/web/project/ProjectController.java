@@ -1,6 +1,6 @@
 package inje.web.project;
 
-import inje.bim.client.serviceInferface.service.ServiceInterfaceService;
+import inje.bim.other.client.service.service.ServiceInterface;
 import inje.security.LoginUserDetail;
 import org.bimserver.interfaces.objects.SProject;
 import org.bimserver.interfaces.objects.SRevision;
@@ -34,7 +34,7 @@ import java.util.List;
 @Controller
 public class ProjectController {
     @Autowired
-    private ServiceInterfaceService serviceInterfaceService;
+    private ServiceInterface serviceInterfaceService;
 
     /**
      * 사용자 프로젝트 조회

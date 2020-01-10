@@ -33,6 +33,11 @@ public class BimApplication extends SpringBootServletInitializer {
         return new JsonBimServerClientFactory(bimServerProperties.getAddress());
     }
 
+    /**
+     * 관리자가 사용할 BimServerClient
+     * @return
+     * @throws Exception
+     */
     @Bean
     public BimServerClient adminBimServerClient() throws BimServerClientException, ServiceException, ChannelConnectionException {
         BimServerClient bimServerClient = this.jsonBimServerClientFactory().create(new UsernamePasswordAuthenticationInfo(bimServerProperties.getUsername(), bimServerProperties.getPassword()));

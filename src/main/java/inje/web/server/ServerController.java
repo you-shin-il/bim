@@ -1,7 +1,7 @@
 package inje.web.server;
 
-import inje.bim.client.serviceInferface.model.SUserSearch;
-import inje.bim.client.serviceInferface.service.ServiceInterfaceService;
+import inje.bim.other.client.service.model.SUserSearch;
+import inje.bim.other.client.service.service.ServiceInterface;
 import org.bimserver.interfaces.objects.SUser;
 import org.bimserver.shared.exceptions.PublicInterfaceNotFoundException;
 import org.bimserver.shared.exceptions.ServiceException;
@@ -33,10 +33,10 @@ import java.util.Optional;
 @Controller
 public class ServerController {
     @Autowired
-    private ServiceInterfaceService serviceInterfaceService;
+    private ServiceInterface serviceInterfaceService;
 
     /**
-     * 사용자 모두 조회
+     * 모든 사용자 조회
      * bimviews -> Server -> List Users
      *
      * @param model
@@ -69,42 +69,6 @@ public class ServerController {
         //model.addAttribute("result", result);
         model.addAttribute("searchSUser", searchSUser);
         return "server/serviceInterface/userDetailView";
-    }
-
-    /**
-     * 사용자 삭제
-     * bimviews -> Server -> List Users -> Actions 클릭 -> Delete 클릭
-     *
-     * @param model
-     * @param searchSUser
-     * @return
-     * @throws Exception
-     */
-    @ResponseBody
-    @RequestMapping(value = "/server/serviceInterface/deleteUser.do")
-    public boolean deleteUser(ModelMap model, SUserSearch searchSUser, Long oid) throws ServiceException, PublicInterfaceNotFoundException {
-        return serviceInterfaceService.deleteUser(oid);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/server/serviceInterface/unDeleteUser.do")
-    public boolean unDeleteUser(ModelMap model, SUserSearch searchSUser, Long oid) throws ServiceException, PublicInterfaceNotFoundException {
-        return serviceInterfaceService.deleteUser(oid);
-    }
-
-    /**
-     * 사용자 추가
-     * bimviews -> Server -> List Users -> Add user 클릭
-     *
-     * @param model
-     * @param searchSUser
-     * @return
-     * @throws Exception
-     */
-    @ResponseBody
-    @RequestMapping(value = "/server/serviceInterface/addUser.do")
-    public boolean addUser(ModelMap model, SUserSearch searchSUser, Long oid) throws ServiceException, PublicInterfaceNotFoundException {
-        return serviceInterfaceService.deleteUser(oid);
     }
 
     /**
@@ -144,4 +108,5 @@ public class ServerController {
             return "server/serviceInterface/userDetailView";
         }
     }
+
 }

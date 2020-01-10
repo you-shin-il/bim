@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		    READ_ONLY(3);
 		* */
 		http.csrf().disable().authorizeRequests();
-		http.authorizeRequests().mvcMatchers("/login/**", "/css/**", "/js/**", "/img/**").permitAll()
+		http.authorizeRequests().mvcMatchers("/join/**","/login/**", "/css/**", "/js/**", "/img/**").permitAll()
 								.mvcMatchers("/serviceInterface/**").hasAnyRole("ADMIN", "USER") //내부적으로 접두어 "ROLE_"가 붙는다.
                                 .mvcMatchers("/project/**").hasAnyRole("ADMIN", "USER") //내부적으로 접두어 "ROLE_"가 붙는다.
                                 .mvcMatchers("/openapi/**").hasAnyRole("ADMIN", "USER") //내부적으로 접두어 "ROLE_"가 붙는다.
@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		http.formLogin().loginPage("/login/loginForm.do")
 						.loginProcessingUrl("/authenticate")
-						.defaultSuccessUrl("/serviceInterface/getAllUsers.do")
+						.defaultSuccessUrl("/server/serviceInterface/getAllUsers.do")
 						.usernameParameter("username")
 						.passwordParameter("password");
 	}
