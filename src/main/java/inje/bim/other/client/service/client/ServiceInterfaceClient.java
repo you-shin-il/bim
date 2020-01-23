@@ -1,6 +1,7 @@
 package inje.bim.other.client.service.client;
 
 import inje.bim.other.client.Client;
+import inje.security.LoginUserDetail;
 import org.bimserver.interfaces.objects.*;
 import org.bimserver.shared.exceptions.PublicInterfaceNotFoundException;
 import org.bimserver.shared.exceptions.ServerException;
@@ -67,4 +68,13 @@ public class ServiceInterfaceClient {
     public List<SProjectSmall> getAllRelatedProjects(Long aLong) throws PublicInterfaceNotFoundException, ServerException, UserException {
         return bimServerClient.getBimServerClient().getServiceInterface().getAllRelatedProjects(aLong);
     }
+
+    public SProject addProject(LoginUserDetail loginUserDetail) throws PublicInterfaceNotFoundException, ServerException, UserException {
+        return loginUserDetail.getBimServerClient().getServiceInterface().addProject(/*param1:프로젝트명*/"", /*param2:schema명*/"");
+    }
+
+    public void updateProject(LoginUserDetail loginUserDetail, SProject sProject) throws PublicInterfaceNotFoundException, ServerException, UserException {
+        loginUserDetail.getBimServerClient().getServiceInterface().updateProject(sProject);
+    }
+
 }

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -58,7 +58,7 @@
                                     <a class="small" href="#" onclick="fn_passwordReset();">비밀번호 초기화</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="register.html">사용자 생성</a>
+                                    <a class="small" href="#" onclick="fn_addUser();">사용자 생성</a>
                                 </div>
                             </div>
                         </div>
@@ -99,8 +99,21 @@
 	    window.open('/user/passwordResetPopup.do', '비밀번호 초기화', 'scrollbars=yes, width=' + w / systemZoom + ', height=' + h / systemZoom + ', top=' + top + ', left=' + left);
     }
 
-    function fn_userCreate() {
-	    console.log("fn_userCreate");
+    function fn_addUser() {
+        var w = 600;//가로크기
+        var h = 420;//세로크기
+
+        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : window.screenX;
+        var dualScreenTop = window.screenTop != undefined ? window.screenTop : window.screenY;
+
+        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+        var systemZoom = width / window.screen.availWidth;
+        var left = (width - w) / 2 / systemZoom + dualScreenLeft;
+        var top = (height - h) / 2 / systemZoom + dualScreenTop;
+
+        window.open('/user/addPopup.do', '사용자 생성', 'scrollbars=yes, width=' + w / systemZoom + ', height=' + h / systemZoom + ', top=' + top + ', left=' + left);
     }
 </script>
 </body>

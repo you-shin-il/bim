@@ -1,6 +1,6 @@
 package inje;
 
-import inje.bim.server.BimServerProperties;
+import inje.bim.BimServerProperties;
 import org.bimserver.client.BimServerClient;
 import org.bimserver.client.json.JsonBimServerClientFactory;
 import org.bimserver.shared.ChannelConnectionException;
