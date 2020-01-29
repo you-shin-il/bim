@@ -83,6 +83,20 @@ public class AdminServiceInterfaceImpl implements AdminServiceInterface {
         return adminServiceInterfaceClient.addUser(sUser, selfRegistration, resetUrl);
     }
 
+
+    /**
+     * 사용자 추가(비밀번호 입력)
+     * @param sUser
+     * @param password
+     * @param selfRegistration
+     * @param resetUrl
+     * @return
+     * @throws Exception
+     */
+    public SUser addUserWithPassword(SUser sUser, String password, Boolean selfRegistration, String resetUrl) throws PublicInterfaceNotFoundException, ServiceException {
+        return adminServiceInterfaceClient.addUserWithPassword(sUser, password, selfRegistration, resetUrl);
+    }
+
     /**
      * 사용자 삭제
      * @param oid
@@ -131,5 +145,17 @@ public class AdminServiceInterfaceImpl implements AdminServiceInterface {
      */
     public List<SProjectSmall> getAllRelatedProjects(Long oid) throws PublicInterfaceNotFoundException, ServerException, UserException {
         return adminServiceInterfaceClient.getAllRelatedProjects(oid);
+    }
+
+    /**
+     * 프로젝트 생성
+     *
+     * @param projectName
+     * @param schema
+     * @return
+     * @throws Exception
+     */
+    public SProject addProject(String projectName, String schema) throws ServerException, UserException {
+        return adminServiceInterfaceClient.addProject(projectName, schema);
     }
 }

@@ -48,7 +48,7 @@ public class AdminServiceInterfaceClient {
     }
 
     /**
-     * 사용자 추가
+     * 사용자 추가(비밀번호 미입력)
      * @param sUser
      * @param selfRegistration
      * @param resetUrl
@@ -57,6 +57,19 @@ public class AdminServiceInterfaceClient {
      */
     public SUser addUser(SUser sUser, Boolean selfRegistration, String resetUrl) throws ServiceException {
         return serviceInterface.addUser(sUser.getUsername(), sUser.getName(), sUser.getUserType(), selfRegistration, resetUrl);
+    }
+
+    /**
+     * 사용자 추가(비밀번호 입력)
+     * @param sUser
+     * @param password
+     * @param selfRegistration
+     * @param resetUrl
+     * @return
+     * @throws Exception
+     */
+    public SUser addUserWithPassword(SUser sUser, String password, Boolean selfRegistration, String resetUrl) throws ServiceException {
+        return serviceInterface.addUserWithPassword(sUser.getUsername(), password, sUser.getName(), sUser.getUserType(), selfRegistration, resetUrl);
     }
 
     /**
@@ -116,5 +129,16 @@ public class AdminServiceInterfaceClient {
      */
     public List<SProjectSmall> getAllRelatedProjects(Long oid) throws PublicInterfaceNotFoundException, ServerException, UserException {
         return serviceInterface.getAllRelatedProjects(oid);
+    }
+
+    /**
+     * 프로젝트 생성
+     * @param projectName
+     * @param schema
+     * @return
+     * @throws Exception
+     */
+    public SProject addProject(String projectName, String schema) throws ServerException, UserException {
+        return serviceInterface.addProject(projectName, schema);
     }
 }

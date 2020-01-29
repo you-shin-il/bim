@@ -81,4 +81,16 @@ public class ProjectController {
         model.addAttribute("result", result);
         return "project/serviceInterface/getAllRevisionsOfProject";
     }
+
+    /**
+     * 프로젝트 생성 화면
+     *
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/project/serviceInterface/addProjectPopup.do")
+    public String addProjectPopup(ModelMap model, @AuthenticationPrincipal LoginUserDetail loginUserDetail) throws ServiceException, PublicInterfaceNotFoundException {
+        return "project/addProjectPopup";
+    }
 }

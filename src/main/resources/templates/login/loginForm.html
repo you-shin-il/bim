@@ -101,7 +101,7 @@
 
     function fn_addUser() {
         var w = 600;//가로크기
-        var h = 420;//세로크기
+        var h = 500;//세로크기
 
         var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : window.screenX;
         var dualScreenTop = window.screenTop != undefined ? window.screenTop : window.screenY;
@@ -113,7 +113,7 @@
         var left = (width - w) / 2 / systemZoom + dualScreenLeft;
         var top = (height - h) / 2 / systemZoom + dualScreenTop;
 
-        window.open('/user/addPopup.do', '사용자 생성', 'scrollbars=yes, width=' + w / systemZoom + ', height=' + h / systemZoom + ', top=' + top + ', left=' + left);
+        window.open('/user/addUserPopup.do', '사용자 생성', 'scrollbars=yes, width=' + w / systemZoom + ', height=' + h / systemZoom + ', top=' + top + ', left=' + left);
     }
 </script>
 </body>
